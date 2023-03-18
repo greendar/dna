@@ -67,16 +67,6 @@ class Traits:
             temp += self.passedTraits(trait)
         return temp
 
-
-    def load(self, userInput):
-        # Deprecated
-        if userInput == '':
-            userInput = input("Enter Traits Here (8 letters QTRDqtrd)")
-        self.traitList[0] = userInput[0:2]
-        self.traitList[1] = userInput[2:4]
-        self.traitList[2] = userInput[4:6]
-        self.traitList[3] = userInput[6:]
-
     def add(self, other): # NEED to change for larger sets
         self.heirTraitList[0] = self.traitList[0] + other.traitList[0]
         self.heirTraitList[1] = self.traitList[1] + other.traitList[1]
