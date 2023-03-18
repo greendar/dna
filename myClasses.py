@@ -32,6 +32,8 @@ class Traits:
         for pair in self.traitListIn:
             self.traitList.append(self.traitOrder(pair))
 
+
+
     def traitOrder(self, traitsIn):
         # to determine first or second position in the pair
         trait1 = traitsIn[0]
@@ -68,10 +70,9 @@ class Traits:
         return temp
 
     def add(self, other): # NEED to change for larger sets
-        self.heirTraitList[0] = self.traitList[0] + other.traitList[0]
-        self.heirTraitList[1] = self.traitList[1] + other.traitList[1]
-        self.heirTraitList[2] = self.traitList[2] + other.traitList[2]
-        self.heirTraitList[3] = self.traitList[3] + other.traitList[3]
+        for i in range(len(self.traitList)):
+            self.heirTraitList[i] = self.traitList[i] + other.traitList[i]
+
 
     def passedTraits(self, traitsIn):
         '''
