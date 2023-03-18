@@ -1,5 +1,12 @@
 import random
 
+class Person:
+    def __init__(self, mother, father):
+        self.mother = mother
+        self.father = father
+        self.genes = mother.add(father)
+        self.generation = self.mother.generation + 1
+
 class Traits:
     """
     List in Order (in pairs)
@@ -9,30 +16,12 @@ class Traits:
     Have not included any code that indicates gender.
     """
 
-    rank = 'QTRDqtrd'
-    # NOT USED YET can use rank.find(var) to access priority order
-
-    # The percentage a dominant trait will be chosen over non-dominant
-    dominantTraitPerc = 0.75  # currently not used
-
-    # A weighting to show the likelyhood of
-    # trait to be chosen over another of similar dominance
-    # Dom vs Dom, Dom vs nDom, nDom vs nDom
-    dominantQPerc = [0.5, 0.7, 0.5]
-    dominantZPerc = [0.5, 0.7, 0.5]
-    dominantWPerc = [0.5, 0.7, 0.5]
-    dominantXPerc = [0.5, 0.7, 0.5]
-    #NOT USED YET hard coded into traitOrder method
-
     def __init__(self, traitInput):
     # Initialize traitList
         self.traitList = []
         self.traitListIn = [traitInput[0:2], traitInput[2:4], traitInput[4:6], traitInput[6:]]
-        self.heirTraitList = [0,0,0,0]
         for pair in self.traitListIn:
             self.traitList.append(self.traitOrder(pair))
-
-
 
     def traitOrder(self, traitsIn):
         # to determine first or second position in the pair
@@ -57,22 +46,25 @@ class Traits:
             else:
                 return trait1 + trait2
     
-
     def show(self):
         for trait in self.traitList:
             print(trait, end='-')
         print()
 
-    def makeHeir(self):
+    def makeHeir(self, other):
         temp = ''
-        for trait in self.heirTraitList:
+        heirTraitList = [0,0,0,0]
+        for i in range(len(self.traitList)):
+            heirTraitList[i] = self.traitList[i] + other.traitList[i]
+        for trait in heirTraitList:
             temp += self.passedTraits(trait)
         return temp
 
+''' Depricated
     def add(self, other): # NEED to change for larger sets
         for i in range(len(self.traitList)):
             self.heirTraitList[i] = self.traitList[i] + other.traitList[i]
-
+'''
 
     def passedTraits(self, traitsIn):
         '''
@@ -109,9 +101,8 @@ if __name__ == "__main__":
         a.show()
         print('Show b')
         b.show()
-        a.add(b)
         print('Show heir', end='\n                  ')
-        c = Traits(a.makeHeir())
+        c = Traits(a.makeHeir(b))
         c.show()
 
 
